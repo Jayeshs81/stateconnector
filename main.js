@@ -3,6 +3,7 @@
  ************************************************************************/
 const express = require("express");
 const bodyparser = require("body-parser");
+const request=require('request');
 
 var app = express();
 app.use(bodyparser.json());
@@ -69,12 +70,34 @@ app.get("/", function(req, res) {
 
     descriptor.version = 1;
     descriptor.protocolVersion = 1;
-    
+
     res.set('Content-Type', 'application/json');
     var decsriptor = JSON.stringify(descriptor);
     res.send(decsriptor);
 });
 
+app.get("/States_of_India/options", function(req, response) {
+    request.get('http://services.groupkt.com/state/get/IND/all', function(err,res,body) {
+        console.log("-- Receive request for options.");
+        if(err) { console.log("-- Error occurred when getting options."); }
+        if(res.statusCode == 200 ) {
+            console.log("-- Response body.");
+            console.log(body);
+            var data = JSON.parse(body);
+            var states = [];
+            for(var i = 0; i < data.RestResponse.result.length; i++) {
+                var state = {};
+                state.id = data.RestResponse.result[i].id;
+                state.name = data.RestResponse.result[i].name;
+                states.push(state);
+            }
+            response.set('Content-Type', 'application/json');
+            console.log(JSON.stringify(states));
+            response.send(JSON.stringify(states));
+        }
+    });
+}
+)
 
 var port = process.env.PORT || 8080;
 app.listen(port, function() {
