@@ -15,8 +15,6 @@ app.get("/", function(req, res) {
     descriptor.key = "States_of_India";
     descriptor.name = "States of India";
     descriptor.description = "Provides a list of states in India";
-    descriptor.version = "0.1";
-    descriptor.protocolVersion = "1";
 
     stateDescriptor = {};
     stateDescriptor.key = "State";
@@ -69,6 +67,9 @@ app.get("/", function(req, res) {
     stateDescriptor.fields = [id, country, name, abbr, area, largest_city, capital];
     descriptor.typeDescriptors = [stateDescriptor];
 
+    descriptor.version = 1;
+    descriptor.protocolVersion = 1;
+    
     res.set('Content-Type', 'application/json');
     var decsriptor = JSON.stringify(descriptor);
     res.send(decsriptor);
