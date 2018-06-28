@@ -183,6 +183,7 @@ app.get("/state/:abbr", function(req, response) {
                 if(abbr == data.RestResponse.result[i].abbr)
                 { 
                     state = data.RestResponse.result[i];
+                    state.id = state.abbr;
                     break;
                 }
             }
