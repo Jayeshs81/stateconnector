@@ -4,6 +4,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const request=require('request');
+const _ = require("lodash");
 
 var app = express();
 app.use(bodyparser.json());
@@ -91,6 +92,15 @@ app.get("/state/options", function(req, response) {
                 state.name = data.RestResponse.result[i].name;
                 states.push(state);
             }
+
+            const query = req.query.filter || "";
+            console.log("Query - " + query);
+            const filtered_States = _.filter(states, function(s) {
+                return _.includes(s.name.toLowerCase(), query.toLowerCase());
+            });
+          
+            response.json(filtered_States);
+
             response.set('Content-Type', 'application/json');
             console.log(JSON.stringify(states));
             response.send(JSON.stringify(states));
