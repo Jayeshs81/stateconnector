@@ -20,6 +20,7 @@ app.get("/", function(req, res) {
 
     stateDescriptor = {};
     stateDescriptor.key = "State";
+    stateDescriptor.name = "State";
     stateDescriptor.recordType = "value";
     stateDescriptor.optionsAvailable = true;
     stateDescriptor.fetchOneAvailable = true;
