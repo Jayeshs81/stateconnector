@@ -88,7 +88,7 @@ app.get("/state/options", function(req, response) {
             var states = [];
             for(var i = 0; i < data.RestResponse.result.length; i++) {
                 var state = {};
-                state.id = data.RestResponse.result[i].id;
+                state.id = data.RestResponse.result[i].abbr;
                 state.name = data.RestResponse.result[i].name;
                 states.push(state);
             }
