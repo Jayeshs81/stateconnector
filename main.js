@@ -99,11 +99,9 @@ app.get("/state/options", function(req, response) {
                 return _.includes(s.name.toLowerCase(), query.toLowerCase());
             });
           
-            response.json(filtered_States);
-
             response.set('Content-Type', 'application/json');
-            console.log(JSON.stringify(states));
-            response.send(JSON.stringify(states));
+            //console.log(JSON.stringify(states));
+            response.send(JSON.stringify(filtered_States));
         }
     });
 }
