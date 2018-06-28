@@ -76,7 +76,7 @@ app.get("/", function(req, res) {
     res.send(decsriptor);
 });
 
-app.get("/States_of_India/options", function(req, response) {
+app.get("/state/options", function(req, response) {
     request.get('http://services.groupkt.com/state/get/IND/all', function(err,res,body) {
         console.log("-- Receive request for options.");
         if(err) { console.log("-- Error occurred when getting options."); }
